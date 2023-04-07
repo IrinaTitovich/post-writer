@@ -1,0 +1,47 @@
+{
+  "name": "my-app",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc && vite build",
+    "preview": "vite preview",
+    "server": "ts-node src/server/index.ts",
+    "test": "npx vitest"
+  },
+  "dependencies": {
+    "@vue/test-utils": "^2.2.0",
+    "jsdom": "^20.0.3",
+    "luxon": "^2.3.1",
+    "pinia": "^2.0.27",
+    "vue": "^3.2.41",
+    "vue-router": "^4.0.15"
+  },
+  "devDependencies": {
+    "@types/body-parser": "1.19",
+    "@types/cookie-parser": "^1.4.0",
+    "@types/cors": "2.8",
+    "@types/express": "4.17",
+    "@types/express-session": "^1.17.3",
+    "@types/jsonwebtoken": "^8.5.1",
+    "@types/lodash": "4.14",
+    "@types/luxon": "^3.1.0",
+    "@types/marked": "^4.0.3",
+    "@vitejs/plugin-vue": "^2.3.4",
+    "@vitest/coverage-c8": "^0.29.2",
+    "body-parser": "1.19",
+    "cookie-parser": "^1.4.0",
+    "cors": "2.8",
+    "express": "4.17",
+    "express-session": "^1.17.3",
+    "highlight.js": "11.5",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "4.14",
+    "marked": "^4.0.3",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.6.4",
+    "vite": "^2.9.15",
+    "vitest": "^0.29.2",
+    "vue-tsc": "^1.0.9"
+  }
+}

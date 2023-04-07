@@ -1,0 +1,14 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`PostWrite > writes a post using markdown 1`] = `
+[
+  {
+    "authorId": "1",
+    "created": "",
+    "html": "",
+    "id": "145",
+    "markdown": "",
+    "title": "",
+  },
+]
+`;
