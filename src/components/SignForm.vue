@@ -4,7 +4,7 @@ import FormInput from "./FormInput.vue";
 import { minmaxLength, required, validate } from "../validation";
 import { NewUser } from "../user";
 
-const props = defineProps<{
+defineProps<{
   error?: string;
 }>();
 

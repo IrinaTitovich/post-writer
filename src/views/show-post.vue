@@ -1,5 +1,3 @@
-
-
 <script setup lang="ts">
 import { computed, watch } from "vue";
 import { useRoute } from "vue-router";
@@ -21,12 +19,10 @@ const usersStore = useUsers();
 
 const isEdittable = computed(() => {
   if (!usersStore.currentUserId) {
-    console.log("here", post);
     return false;
   }
 
   if (post.authorId !== usersStore.currentUserId) {
-    console.log("or here", post);
     return false;
   }
 
@@ -38,17 +34,18 @@ watch(isEdittable, (isw) => isw);
 
 <template>
   <div class="columns">
-    <div class="column"></div>
+    <div class="column" />
     <div v-if="post" class="column is-two-thirds">
       <RouterLink
         v-if="isEdittable"
         :to="`/posts/${post.id}/edit`"
         class="is-link button is-rounded"
-        >Edit Post</RouterLink
       >
+        Edit Post
+      </RouterLink>
       <h1>{{ post.title }}</h1>
-      <div v-html="post.html"></div>
+      <div v-html="post.html" />
     </div>
-    <div class="column"></div>
+    <div class="column" />
   </div>
 </template>

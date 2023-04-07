@@ -30,7 +30,7 @@ const emit = defineEmits<{
         "
       />
     </div>
-    <div v-if="status.showError" class="is-danger help">
+    <div v-if="!status.valid" class="is-danger help">
       {{ status.message }}
     </div>
   </div>

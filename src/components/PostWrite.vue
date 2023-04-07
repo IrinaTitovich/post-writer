@@ -95,7 +95,7 @@ function onSaveChanges() {
         id="contenteditable"
         contenteditable
         ref="contentEditable"
-        @input="onInput"
+        @input="onInput()"
       />
     </div>
 
@@ -103,9 +103,13 @@ function onSaveChanges() {
       <div v-html="html" />
     </div>
   </div>
+
   <div class="columns">
     <div class="column">
-      <button class="button is-primary is-pulled-right" @click="onSaveChanges">
+      <button
+        class="button is-primary is-pulled-right"
+        @click="onSaveChanges()"
+      >
         Save Post
       </button>
     </div>

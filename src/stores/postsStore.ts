@@ -80,8 +80,8 @@ export const usePosts = defineStore("posts", {
       const data = (await response.json()) as Post[];
       await delay();
 
-      let ids: string[] = [];
-      let all = new Map<string, Post>();
+      const ids: string[] = [];
+      const all = new Map<string, Post>();
       for (const post of data) {
         ids.push(post.id);
         all.set(post.id, post);

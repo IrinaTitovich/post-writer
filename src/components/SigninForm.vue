@@ -22,7 +22,11 @@ async function onSubmit(newUser: NewUser) {
 </script>
 
 <template>
-  <SignForm data-testid="sign-in-form" @submit="onSubmit($event)" :error="error" />
+  <SignForm
+    data-testid="sign-in-form"
+    @submit="onSubmit($event)"
+    :error="error"
+  />
 </template>
 
 <style>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import Navbar from "./components/Navbar.vue";
+import NavBar from "./components/NavBar.vue";
 import { useModal } from "./composables/modal";
 
 const modal = useModal();
@@ -20,12 +20,12 @@ const modalStyle = computed(() => {
         <div id="modal" />
       </div>
     </div>
-    <button class="modal-close is-large" @click="modal.hideModal()"></button>
+    <button class="modal-close is-large" @click="modal.hideModal()" />
   </div>
 
   <div class="section">
     <div class="container">
-      <Navbar />
+      <NavBar />
       <router-view />
     </div>
   </div>

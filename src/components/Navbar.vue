@@ -1,5 +1,3 @@
-<script lang="ts"></script>
-
 <script setup lang="ts">
 import { useRouter } from "vue-router";
 import { useModal } from "../composables/modal";
@@ -30,7 +28,12 @@ async function logout() {
       </div>
 
       <div v-else class="buttons">
-        <button id="sign-up" data-testid="sign-up" class="button" @click="modal.showModal('sign-up')">
+        <button
+          id="sign-up"
+          data-testid="sign-up"
+          class="button"
+          @click="modal.showModal('sign-up')"
+        >
           Sign Up
         </button>
         <button
@@ -45,6 +48,6 @@ async function logout() {
   </div>
 
   <Teleport to="#modal">
-    <component :is="modal.component.value"></component>
+    <component :is="modal.component.value" />
   </Teleport>
 </template>

@@ -17,6 +17,7 @@ if (!post) {
 
 async function onEditPost(post: Post) {
   await postsStore.updatePost(post);
+  await postsStore.fetchPosts();
   router.push("/");
 }
 </script>

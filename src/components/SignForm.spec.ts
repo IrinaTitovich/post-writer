@@ -1,9 +1,8 @@
 import { DOMWrapper, mount } from "@vue/test-utils";
 import { createPinia, Pinia, setActivePinia } from "pinia";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it } from "vitest";
 import { createRouter, createWebHistory, Router } from "vue-router";
 import { routes } from "../router";
-import { NewUser } from "../user";
 import SignForm from "./SignForm.vue";
 
 describe("SignForm", () => {
@@ -31,25 +30,6 @@ describe("SignForm", () => {
 
     expect(wrapper.find('[data-testid="user-name"]').exists()).toBe(true);
   });
-
-  it.todo(
-    "not renders validation messages when the form is just opened",
-    () => {
-      const wrapper = mount(SignForm, {
-        global: {
-          plugins: [pinia, router],
-        },
-      });
-
-      // expect(
-      //   wrapper.find('[data-testid="user-name"]').find(".is-danger").exists()
-      // ).toBe(false);
-
-      // expect(
-      //   wrapper.find('[data-testid="user-password"]').find(".is-danger").exists()
-      // ).toBe(false);
-    }
-  );
 
   const setIncorrectValueRequired = async (input: DOMWrapper<Element>) =>
     await input.setValue("");
@@ -154,8 +134,6 @@ describe("SignForm", () => {
 
     await setIncorrectValueMax(userpassField.find("#Password"));
 
-    console.log(wrapper.html());
-
     expect(userpassField.find(".is-danger").text()).toBe(
       "This field must be between 10 and 20 characters"
     );
@@ -202,8 +180,6 @@ describe("SignForm", () => {
       },
     });
 
-    const form = wrapper.find("form");
-    const btnElement = wrapper.find("button").element;
     const userpassFieldInput = wrapper
       .find('[data-testid="user-password"]')
       .find("#Password");
@@ -218,9 +194,11 @@ describe("SignForm", () => {
 
     const emittedPayload = wrapper.emitted().submit[0];
 
-    expect(emittedPayload).toEqual([{
-      username: "1234567890",
-      password: "1234567890",
-    }]);
+    expect(emittedPayload).toEqual([
+      {
+        username: "1234567890",
+        password: "1234567890",
+      },
+    ]);
   });
 });

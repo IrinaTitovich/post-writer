@@ -1,4 +1,4 @@
-import express, { Request, Response } from "express";
+import express, { Response } from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
@@ -17,14 +17,14 @@ const users: User[] = [];
 const SECRET = "my-secret";
 const COOKIE = "jwt";
 
-app.post<{}, {}, Post>("/posts", (req, res) => {
+app.post<unknown, unknown, Post>("/posts", (req, res) => {
   const post = { ...req.body, id: (Math.random() * 10000).toFixed() };
   posts.push(post);
 
   res.json(post);
 });
 
-app.put<{}, {}, Post>("/posts", (req, res) => {
+app.put<unknown, unknown, Post>("/posts", (req, res) => {
   const updatedPost = { ...req.body };
   const index = posts.findIndex(({ id }) => id === updatedPost.id);
 
@@ -33,7 +33,7 @@ app.put<{}, {}, Post>("/posts", (req, res) => {
   res.json(posts[index]);
 });
 
-function autentification(id: string, req: Request, res: Response) {
+function autentification(id: string, res: Response) {
   const token = jsonwebtoken.sign({ id }, SECRET, {
     issuer: "IT",
     expiresIn: "30 days",
@@ -46,6 +46,7 @@ app.get("/current-user", (req, res) => {
   try {
     const token = req.cookies[COOKIE];
     const result = jsonwebtoken.verify(token, SECRET) as { id: string };
+
     res.json({ id: result.id });
   } catch (e) {
     res.status(404).end();
@@ -56,23 +57,24 @@ app.get("/posts", (req, res) => {
   res.json(posts);
 });
 
-app.post<{}, {}, NewUser>("/users", (req, res) => {
+app.post<unknown, unknown, NewUser>("/users", (req, res) => {
   const user: User = { ...req.body, id: (Math.random() * 10000).toFixed() };
   users.push(user);
-  autentification(user.id, req, res);
+  autentification(user.id, res);
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { password, ...userResponse } = user;
 
   res.json({ userResponse });
 });
 
-app.post<{}, {}, NewUser>("/login", (req, res) => {
+app.post<unknown, unknown, NewUser>("/login", (req, res) => {
   const user = { ...req.body };
 
   const existingUser = users.find((u) => u.username === user.username);
 
   if (existingUser && user.password === existingUser.password) {
-    autentification(existingUser.id, req, res);
+    autentification(existingUser.id, res);
     res.status(200).end();
   } else {
     res.status(401).end();

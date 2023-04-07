@@ -4,7 +4,7 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import { createRouter, createWebHistory, Router } from "vue-router";
 import { routes } from "../router";
 import { useUsers } from "../stores/userStore";
-import Navbar from "./Navbar.vue";
+import NavBar from "./NavBar.vue";
 
 vi.stubGlobal(
   "fetch",
@@ -13,7 +13,7 @@ vi.stubGlobal(
   })
 );
 
-describe("Navbar", () => {
+describe("NavBar", () => {
   let pinia: Pinia;
   let router: Router;
 
@@ -32,7 +32,7 @@ describe("Navbar", () => {
   });
 
   it("renders sign-in and sign up buttons when users not authenticated", () => {
-    const wrapper = mount(Navbar, {
+    const wrapper = mount(NavBar, {
       global: {
         plugins: [pinia, router],
       },
@@ -46,7 +46,7 @@ describe("Navbar", () => {
     const usersStore = useUsers();
     usersStore.currentUserId = "1";
 
-    const wrapper = mount(Navbar, {
+    const wrapper = mount(NavBar, {
       global: {
         plugins: [pinia, router],
       },
@@ -66,7 +66,7 @@ describe("Navbar", () => {
     const usersStore = useUsers();
     usersStore.currentUserId = "1";
 
-    const wrapper = mount(Navbar, {
+    const wrapper = mount(NavBar, {
       global: {
         plugins: [pinia, router],
       },
@@ -79,7 +79,7 @@ describe("Navbar", () => {
   });
 
   it("sign-in form opens after clicking button sign-in", async () => {
-    const wrapper = mount(Navbar, {
+    const wrapper = mount(NavBar, {
       global: {
         plugins: [pinia, router],
       },
@@ -96,7 +96,7 @@ describe("Navbar", () => {
   });
 
   it("sign-up form opens after clicking button sign-up", async () => {
-    const wrapper = mount(Navbar, {
+    const wrapper = mount(NavBar, {
       global: {
         plugins: [pinia, router],
       },
