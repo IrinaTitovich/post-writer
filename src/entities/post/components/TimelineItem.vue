@@ -2,13 +2,13 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "HelloWorld",
+  name: "TimelineItem",
 });
 </script>
 
 <script setup lang="ts">
 import { RouterLink } from "vue-router";
-import { TimeLinePost } from "../entities/post";
+import { TimeLinePost } from "..";
 
 defineProps<{
   post: TimeLinePost;

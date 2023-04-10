@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import Timeline from "../components/Timeline.vue";
-import { usePosts } from "../entities/post";
+import { usePosts, TimeLine } from "../entities/post";
 
 const postsStore = usePosts();
 </script>
@@ -8,7 +7,7 @@ const postsStore = usePosts();
 <template>
   <Suspense>
     <template #default>
-      <Timeline v-if="postsStore" />
+      <TimeLine v-if="postsStore" />
     </template>
     <template #fallback> Loading... </template>
   </Suspense>

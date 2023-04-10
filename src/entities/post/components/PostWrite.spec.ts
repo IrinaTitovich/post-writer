@@ -2,8 +2,8 @@ import { mount } from "@vue/test-utils";
 import { createPinia, Pinia, setActivePinia } from "pinia";
 import { describe, beforeEach, it, expect } from "vitest";
 import { createRouter, createWebHistory, Router } from "vue-router";
-import { routes } from "../app/router";
-import { useUsers } from "../entities/user";
+import { routes } from "../../../app/router";
+import { useUsers } from "../../user";
 import PostWrite from "./PostWrite.vue";
 
 describe("PostWrite", () => {

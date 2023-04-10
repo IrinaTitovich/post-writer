@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { DateTime } from "luxon";
-import PostWriter from "../components/PostWrite.vue";
-import { usePosts, Post, TimeLinePost } from "../entities/post";
+import { usePosts, Post, TimeLinePost, PostWrite } from "../entities/post";
 import { useUsers } from "../entities/user";
 import { useCurrentInstance } from "../shared/composables/use-current-instance";
 
@@ -33,5 +32,5 @@ async function createNewPost(post: Post) {
 </script>
 
 <template>
-  <PostWriter :post="post" @submit="createNewPost($event)" />
+  <PostWrite :post="post" @submit="createNewPost($event)" />
 </template>

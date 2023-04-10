@@ -1,14 +1,11 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { useUsers } from "../../entities/user";
-import Home from "../../views/home.vue";
-import NewPost from "../../views/new-post.vue";
-import ShowPost from "../../views/show-post.vue";
-import EditPost from "../../views/edit-post.vue";
+import { EditPost, NewPost, PostView, ShowPost } from "../../pages";
 
 export const routes = [
   {
     path: "/",
-    component: Home,
+    component: PostView,
   },
   {
     path: "/posts/new",

@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { useRoute } from "vue-router";
 import { useCurrentInstance } from "../shared/composables/use-current-instance";
-import PostWriter from "../components/PostWrite.vue";
-import { Post, usePosts } from "../entities/post";
+import { Post, usePosts, PostWrite } from "../entities/post";
 
 const route = useRoute();
 const id: string = typeof route.params.id === "string" ? route.params.id : "";
@@ -24,5 +23,5 @@ async function onEditPost(post: Post) {
 </script>
 
 <template>
-  <PostWriter :post="post" @submit="onEditPost($event)" />
+  <PostWrite :post="post" @submit="onEditPost($event)" />
 </template>

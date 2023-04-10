@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { default as DepartmentDetailsView } from "./TimelineItem.vue";
-import { periods, usePosts } from "../entities/post";
+import { periods } from "../constants";
+import { usePosts } from "../store/postsStore";
 
 const postsStore = usePosts();
 </script>

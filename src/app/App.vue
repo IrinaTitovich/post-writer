@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import NavBar from "../components/NavBar.vue";
-import { useModal } from "../composables/modal";
+import { useModal } from "../entities/user";
 
 const modal = useModal();
 

@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { useRouter } from "vue-router";
-import { useModal } from "../composables/modal";
-import { useUsers } from "../entities/user";
+import { useUsers, useModal } from "../entities/user";
 
 const modal = useModal();
 

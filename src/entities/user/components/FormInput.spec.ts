@@ -1,7 +1,7 @@
 import { mount } from "@vue/test-utils";
 import { describe, it, expect } from "vitest";
 import { computed, defineComponent, ref } from "vue";
-import FormInput from "./FormInput.vue";
+import FormInput from "../../../components./entities/user/components/FormInput.vue";
 
 describe("FormInput", () => {
   it("test validation", async () => {
