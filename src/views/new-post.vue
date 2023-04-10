@@ -4,7 +4,7 @@ import PostWriter from "../components/PostWrite.vue";
 import { Post, TimeLinePost } from "../posts";
 import { usePosts } from "../stores/postsStore";
 import { useUsers } from "../stores/userStore";
-import { useCurrentInstance } from "../use-current-instance";
+import { useCurrentInstance } from "../shared/composables/use-current-instance";
 
 const userStore = useUsers();
 

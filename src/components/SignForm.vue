@@ -2,7 +2,11 @@
 import { useField } from "vee-validate";
 import { computed, ref } from "vue";
 import FormInput from "./FormInput.vue";
-import { minmaxLength, required, validate } from "../validation";
+import {
+  minmaxLength,
+  required,
+  validate,
+} from "../shared/composables/validation";
 import { NewUser } from "../user";
 
 defineProps<{

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useRoute } from "vue-router";
-import { useCurrentInstance } from "../use-current-instance";
+import { useCurrentInstance } from "../shared/composables/use-current-instance";
 import PostWriter from "../components/PostWrite.vue";
 import { Post } from "../posts";
 import { usePosts } from "../stores/postsStore";
