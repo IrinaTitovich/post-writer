@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useField } from "vee-validate";
 import { computed, ref } from "vue";
 import FormInput from "./FormInput.vue";
 import { minmaxLength, required, validate } from "../validation";
@@ -12,18 +13,42 @@ const emit = defineEmits<{
   (event: "submit", payload: NewUser): void;
 }>();
 
-const username = ref("");
-const userNameStatus = computed(() =>
-  validate(username.value, [required, minmaxLength({ max: 15, min: 3 })])
+const { value: username, ...usernameValidation } = useField(
+  ref(""),
+  (value: string) => {
+    const status = validate(value, [
+      required,
+      minmaxLength({ max: 15, min: 3 }),
+    ]);
+
+    if (!status.valid && status.message) {
+      return status.message;
+    }
+
+    return true;
+  }
 );
 
-const password = ref("");
-const passwordStatus = computed(() =>
-  validate(password.value, [required, minmaxLength({ max: 20, min: 10 })])
+const { value: password, ...passwordValidation } = useField(
+  ref(""),
+  (value: string) => {
+    const status = validate(value, [
+      required,
+      minmaxLength({ max: 20, min: 10 }),
+    ]);
+
+    if (!status.valid && status.message) {
+      return status.message;
+    }
+
+    return true;
+  }
 );
 
 const isInvalid = computed(
-  () => !userNameStatus.value.valid || !passwordStatus.value.valid
+  () =>
+    Boolean(usernameValidation.errors.value.length) ||
+    Boolean(passwordValidation.errors.value.length)
 );
 
 async function onSubmit() {
@@ -43,18 +68,26 @@ async function onSubmit() {
 <template>
   <form data-testid="sign-form" class="form" @submit.prevent="onSubmit()">
     <FormInput
-      data-testid="user-name"
-      name="Username"
       v-model="username"
-      :status="userNameStatus"
+      name="Username"
+      data-testid="user-name"
       type="text"
+      :error-message="
+        usernameValidation.meta.dirty && usernameValidation.errorMessage.value
+          ? usernameValidation.errorMessage.value
+          : undefined
+      "
     />
     <FormInput
-      data-testid="user-password"
-      name="Password"
       v-model="password"
-      :status="passwordStatus"
+      name="Password"
+      data-testid="user-password"
       type="password"
+      :error-message="
+        passwordValidation.meta.dirty && passwordValidation.errorMessage.value
+          ? passwordValidation.errorMessage.value
+          : undefined
+      "
     />
     <div v-if="error" class="is-danger help">
       {{ error }}
