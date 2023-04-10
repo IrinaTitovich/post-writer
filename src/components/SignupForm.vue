@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { NewUser } from "../user";
-import { useUsers } from "../stores/userStore";
+import { NewUser, useUsers } from "../entities/user";
 import { useModal } from "../composables/modal";
 import { default as SignForm } from "./SignForm.vue";
 

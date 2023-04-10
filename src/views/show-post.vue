@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import { computed, watch } from "vue";
 import { useRoute } from "vue-router";
-import { Post } from "../posts";
-import { usePosts } from "../stores/postsStore";
-import { useUsers } from "../stores/userStore";
+import { usePosts, Post } from "../entities/post";
+import { useUsers } from "../entities/user";
 
 const route = useRoute();
 const id: string = typeof route.params.id === "string" ? route.params.id : "";

@@ -3,8 +3,8 @@ import { onMounted, ref, watch } from "vue";
 import { marked } from "marked";
 import highlightsjs from "highlight.js";
 import lodash from "lodash";
-import { Post, TimeLinePost } from "../posts";
-import { useUsers } from "../stores/userStore";
+import { Post, TimeLinePost } from "../entities/post";
+import { useUsers } from "../entities/user";
 
 const props = defineProps<{
   post: TimeLinePost | Post;

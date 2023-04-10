@@ -2,8 +2,7 @@
 import { useRoute } from "vue-router";
 import { useCurrentInstance } from "../shared/composables/use-current-instance";
 import PostWriter from "../components/PostWrite.vue";
-import { Post } from "../posts";
-import { usePosts } from "../stores/postsStore";
+import { Post, usePosts } from "../entities/post";
 
 const route = useRoute();
 const id: string = typeof route.params.id === "string" ? route.params.id : "";

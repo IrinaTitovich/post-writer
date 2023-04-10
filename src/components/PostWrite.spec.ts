@@ -3,7 +3,7 @@ import { createPinia, Pinia, setActivePinia } from "pinia";
 import { describe, beforeEach, it, expect } from "vitest";
 import { createRouter, createWebHistory, Router } from "vue-router";
 import { routes } from "../app/router";
-import { useUsers } from "../stores/userStore";
+import { useUsers } from "../entities/user";
 import PostWrite from "./PostWrite.vue";
 
 describe("PostWrite", () => {

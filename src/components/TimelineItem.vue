@@ -8,7 +8,7 @@ export default defineComponent({
 
 <script setup lang="ts">
 import { RouterLink } from "vue-router";
-import { TimeLinePost } from "../posts";
+import { TimeLinePost } from "../entities/post";
 
 defineProps<{
   post: TimeLinePost;

@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
-import { useUsers } from "../../stores/userStore";
+import { useUsers } from "../../entities/user";
 import Home from "../../views/home.vue";
 import NewPost from "../../views/new-post.vue";
 import ShowPost from "../../views/show-post.vue";

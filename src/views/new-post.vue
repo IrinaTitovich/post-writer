@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import { DateTime } from "luxon";
 import PostWriter from "../components/PostWrite.vue";
-import { Post, TimeLinePost } from "../posts";
-import { usePosts } from "../stores/postsStore";
-import { useUsers } from "../stores/userStore";
+import { usePosts, Post, TimeLinePost } from "../entities/post";
+import { useUsers } from "../entities/user";
 import { useCurrentInstance } from "../shared/composables/use-current-instance";
 
 const userStore = useUsers();
@@ -27,6 +26,8 @@ const { vm } = useCurrentInstance();
 
 async function createNewPost(post: Post) {
   await posts.createPost(post);
+  await posts.fetchPosts();
+
   vm.$router.push("/");
 }
 </script>

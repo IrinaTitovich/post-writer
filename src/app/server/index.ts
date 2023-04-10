@@ -3,8 +3,8 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import jsonwebtoken from "jsonwebtoken";
-import { today, thisMonth, thisWeek, Post } from "../../posts";
-import { NewUser, User } from "../../user";
+import { today, thisMonth, thisWeek, Post } from "../../entities/post";
+import { NewUser, User } from "../../entities/user";
 
 const app = express();
 app.use(cors());

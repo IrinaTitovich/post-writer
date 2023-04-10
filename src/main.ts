@@ -1,8 +1,8 @@
 import { createApp } from "vue";
 import { createPinia } from "pinia";
 import { App, router } from "./app/";
-import { useUsers } from "./stores/userStore";
-import { usePosts } from "./stores/postsStore";
+import { useUsers } from "./entities/user";
+import { usePosts } from "./entities/post";
 
 const app = createApp(App);
 
