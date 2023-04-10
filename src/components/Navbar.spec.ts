@@ -2,7 +2,7 @@ import { mount } from "@vue/test-utils";
 import { createPinia, Pinia, setActivePinia } from "pinia";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { createRouter, createWebHistory, Router } from "vue-router";
-import { routes } from "../router";
+import { routes } from "../app/router";
 import { useUsers } from "../stores/userStore";
 import NavBar from "./NavBar.vue";
 

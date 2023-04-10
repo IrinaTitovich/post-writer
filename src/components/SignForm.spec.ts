@@ -2,7 +2,7 @@ import { DOMWrapper, mount } from "@vue/test-utils";
 import { createPinia, Pinia, setActivePinia } from "pinia";
 import { beforeEach, describe, expect, it } from "vitest";
 import { createRouter, createWebHistory, Router } from "vue-router";
-import { routes } from "../router";
+import { routes } from "../app/router";
 import SignForm from "./SignForm.vue";
 
 describe("SignForm", () => {

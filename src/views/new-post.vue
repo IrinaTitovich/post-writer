@@ -4,7 +4,7 @@ import PostWriter from "../components/PostWrite.vue";
 import { Post, TimeLinePost } from "../posts";
 import { usePosts } from "../stores/postsStore";
 import { useUsers } from "../stores/userStore";
-import { router } from "../router";
+import { useCurrentInstance } from "../use-current-instance";
 
 const userStore = useUsers();
 
@@ -23,9 +23,11 @@ const post: TimeLinePost = {
 
 const posts = usePosts();
 
+const { vm } = useCurrentInstance();
+
 async function createNewPost(post: Post) {
   await posts.createPost(post);
-  router.push("/");
+  vm.$router.push("/");
 }
 </script>
 

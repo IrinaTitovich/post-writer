@@ -35,6 +35,7 @@
         "math": "always"
       }
     ],
-    "vue/v-on-handler-style": ["error", "inline"]
+    "vue/v-on-handler-style": ["error", "inline"],
+    "vue/no-unused-properties": "error"
   }
 }

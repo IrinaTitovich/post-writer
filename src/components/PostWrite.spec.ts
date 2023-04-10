@@ -2,7 +2,7 @@ import { mount } from "@vue/test-utils";
 import { createPinia, Pinia, setActivePinia } from "pinia";
 import { describe, beforeEach, it, expect } from "vitest";
 import { createRouter, createWebHistory, Router } from "vue-router";
-import { routes } from "../router";
+import { routes } from "../app/router";
 import { useUsers } from "../stores/userStore";
 import PostWrite from "./PostWrite.vue";
 
@@ -51,7 +51,7 @@ describe("PostWrite", () => {
   });
 
   it("emits a post correctly", () => {
-    return new Promise<void>(async (resolve) => {
+    return new Promise<void>((resolve) => {
       const wrapper = mount(PostWrite, {
         global: {
           plugins: [pinia, router],

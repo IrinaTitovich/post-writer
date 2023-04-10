@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from "vue-router";
-import { useUsers } from "../stores/userStore";
-import Home from "../views/home.vue";
-import NewPost from "../views/new-post.vue";
-import ShowPost from "../views/show-post.vue";
-import EditPost from "../views/edit-post.vue";
+import { useUsers } from "../../stores/userStore";
+import Home from "../../views/home.vue";
+import NewPost from "../../views/new-post.vue";
+import ShowPost from "../../views/show-post.vue";
+import EditPost from "../../views/edit-post.vue";
 
 export const routes = [
   {
