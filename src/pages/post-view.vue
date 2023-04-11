@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { usePosts, TimeLine } from "../entities/post";
+import { usePosts } from "../entities/post";
+import TimeLine from "../entities/post/components/TimeLine.vue";
 
 const postsStore = usePosts();
 </script>

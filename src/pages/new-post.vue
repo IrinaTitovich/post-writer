@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { DateTime } from "luxon";
-import { usePosts, Post, TimeLinePost, PostWrite } from "../entities/post";
+import { usePosts, Post, TimeLinePost } from "../entities/post";
+import PostWrite from "../entities/post/components/PostWrite.vue";
 import { useUsers } from "../entities/user";
 import { useCurrentInstance } from "../shared/composables/use-current-instance";
 

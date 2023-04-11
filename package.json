@@ -6,7 +6,7 @@
     "dev": "vite",
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
-    "server": "ts-node src/server/index.ts",
+    "server": "ts-node src/app/server/index.ts",
     "test": "npx vitest"
   },
   "dependencies": {
