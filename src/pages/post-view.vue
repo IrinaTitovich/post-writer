@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { usePosts } from "../entities/post";
+import { usePostsQuery } from "../entities/post";
 import TimeLine from "../entities/post/components/TimeLine.vue";
 
-const postsStore = usePosts();
+const postsQuery = usePostsQuery();
 </script>
 
 <template>
   <Suspense>
     <template #default>
-      <TimeLine v-if="postsStore" />
+      <TimeLine v-if="postsQuery.data" />
     </template>
     <template #fallback> Loading... </template>
   </Suspense>

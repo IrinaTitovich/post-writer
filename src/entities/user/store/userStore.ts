@@ -5,10 +5,6 @@ interface UserState {
   currentUserId?: string;
 }
 
-function delay() {
-  return new Promise<void>((res) => setTimeout(res, 500));
-}
-
 export const useUsers = defineStore("users", {
   state(): UserState {
     return {
@@ -18,8 +14,6 @@ export const useUsers = defineStore("users", {
 
   actions: {
     async checkAutentification() {
-      await delay();
-
       try {
         const response = await window.fetch("/api/current-user", {
           method: "GET",
@@ -64,8 +58,6 @@ export const useUsers = defineStore("users", {
         headers: { "Content-Type": "application/json" },
         body,
       });
-
-      await delay();
 
       return result;
     },

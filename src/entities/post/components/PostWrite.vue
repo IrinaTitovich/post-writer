@@ -8,6 +8,7 @@ import { useUsers } from "../../../entities/user";
 
 const props = defineProps<{
   post: TimeLinePost | Post;
+  isLoading: boolean;
 }>();
 
 const emit = defineEmits<{
@@ -108,6 +109,10 @@ function onSaveChanges() {
     <div class="column">
       <button
         class="button is-primary is-pulled-right"
+        :class="{
+          'is-loading': isLoading,
+        }"
+        :disabled="isLoading"
         @click="onSaveChanges()"
       >
         Save Post

@@ -2,8 +2,8 @@ import { mount } from "@vue/test-utils";
 import { createPinia, Pinia, setActivePinia } from "pinia";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { createRouter, createWebHistory, Router } from "vue-router";
-import { routes } from "../app/router";
-import { useUsers } from "../entities/user";
+import { routes } from "../router";
+import { useUsers } from "../../entities/user";
 import NavBar from "./NavBar.vue";
 
 vi.stubGlobal(

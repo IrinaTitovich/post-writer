@@ -1,4 +1,6 @@
 export { usePosts } from "./store/postsStore";
+export { usePostsQuery, POSTS_QUERY } from "./queries/use-posts-query";
+
 export * from "./posts";
 export * from "./constants";
 

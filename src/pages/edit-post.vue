@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { useRoute } from "vue-router";
+import { useMutation, useQueryClient } from "@tanstack/vue-query";
 import { useCurrentInstance } from "../shared/composables/use-current-instance";
-import { Post, usePosts } from "../entities/post";
+import { Post, usePosts, POSTS_QUERY } from "../entities/post";
 import PostWrite from "../entities/post/components/PostWrite.vue";
 
 const route = useRoute();
@@ -16,13 +17,18 @@ if (!post) {
 
 const { vm } = useCurrentInstance();
 
-async function onEditPost(post: Post) {
-  await postsStore.updatePost(post);
-  await postsStore.fetchPosts();
-  vm.$router.push("/");
-}
+const createPostMutation = useMutation(postsStore.updatePost, {
+  async onSuccess() {
+    vm.$router.push("/");
+  },
+});
 </script>
 
 <template>
-  <PostWrite :post="post" @submit="onEditPost($event)" />
+  <!-- TODO progressbar -->
+  <PostWrite
+    :post="post"
+    :is-loading="createPostMutation.isLoading.value"
+    @submit="createPostMutation.mutate($event)"
+  />
 </template>

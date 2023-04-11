@@ -1,6 +1,7 @@
 <script setup lang="ts">
+import { useMutation } from "@tanstack/vue-query";
 import { useRouter } from "vue-router";
-import { useUsers, useModal } from "../entities/user";
+import { useUsers, useModal } from "../../entities/user";
 
 const modal = useModal();
 
@@ -8,22 +9,38 @@ const userStore = useUsers();
 
 const router = useRouter();
 
-async function logout() {
-  await userStore.logout();
-  router.push({ path: "/" });
-}
+const logoutUserMutation = useMutation(userStore.logout, {
+  onSuccess: () => {
+    router.push({ path: "/" });
+  },
+});
 </script>
 
 <template>
   <div class="navbar">
     <div class="navbar-end">
       <div v-if="userStore.currentUserId" class="buttons">
-        <RouterLink data-testid="new-post" to="/posts/new" class="button">
-          New Post
-        </RouterLink>
-        <button data-testid="log-out" class="button" @click="logout()">
-          Log out
-        </button>
+        <progress
+          v-if="logoutUserMutation.isLoading.value"
+          class="progress is-primary"
+          :style="{ width: '500px' }"
+        />
+        <template v-else>
+          <RouterLink
+            data-testid="new-post"
+            to="/posts/new"
+            class="button is-link"
+          >
+            New Post
+          </RouterLink>
+          <button
+            data-testid="log-out"
+            class="button"
+            @click="logoutUserMutation.mutate()"
+          >
+            Log out
+          </button>
+        </template>
       </div>
 
       <div v-else class="buttons">

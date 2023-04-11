@@ -10,6 +10,9 @@ const app = express();
 app.use(cors());
 app.use(cookieParser());
 app.use(bodyParser.json());
+app.use(function (req, res, next) {
+  setTimeout(next, 1000);
+});
 
 const posts = [today, thisWeek, thisMonth];
 const users: User[] = [];

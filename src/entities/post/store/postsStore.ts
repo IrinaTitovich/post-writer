@@ -9,10 +9,6 @@ interface IPostsState {
   selectedPeriod: Period;
 }
 
-function delay() {
-  return new Promise<void>((res) => setTimeout(res, 500));
-}
-
 export const usePosts = defineStore("posts", {
   state: (): IPostsState => ({
     ids: [],
@@ -58,8 +54,6 @@ export const usePosts = defineStore("posts", {
     async createPost(newPost: Post) {
       const body = JSON.stringify(newPost);
 
-      await delay();
-
       await window.fetch("/api/posts", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -70,7 +64,6 @@ export const usePosts = defineStore("posts", {
     async updatePost(updatedPost: Post) {
       const body = JSON.stringify(updatedPost);
 
-      await delay();
       await window.fetch("/api/posts", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -81,7 +74,6 @@ export const usePosts = defineStore("posts", {
     async fetchPosts() {
       const response = await window.fetch("/api/posts");
       const data = (await response.json()) as Post[];
-      await delay();
 
       const ids: string[] = [];
       const all = new Map<string, Post>();

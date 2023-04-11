@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { DateTime } from "luxon";
-import { usePosts, Post, TimeLinePost } from "../entities/post";
+import { useMutation, useQueryClient } from "@tanstack/vue-query";
+import { usePosts, TimeLinePost, POSTS_QUERY } from "../entities/post";
 import PostWrite from "../entities/post/components/PostWrite.vue";
 import { useUsers } from "../entities/user";
 import { useCurrentInstance } from "../shared/composables/use-current-instance";
@@ -24,14 +25,17 @@ const posts = usePosts();
 
 const { vm } = useCurrentInstance();
 
-async function createNewPost(post: Post) {
-  await posts.createPost(post);
-  await posts.fetchPosts();
-
-  vm.$router.push("/");
-}
+const createPostMutation = useMutation(posts.createPost, {
+  async onSuccess() {
+    vm.$router.push("/");
+  },
+});
 </script>
 
 <template>
-  <PostWrite :post="post" @submit="createNewPost($event)" />
+  <PostWrite
+    :post="post"
+    :is-loading="createPostMutation.isLoading.value"
+    @submit="createPostMutation.mutate($event)"
+  />
 </template>
