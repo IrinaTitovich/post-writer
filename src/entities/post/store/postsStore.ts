@@ -10,7 +10,7 @@ interface IPostsState {
 }
 
 function delay() {
-  return new Promise<void>((res) => setTimeout(res, 1500));
+  return new Promise<void>((res) => setTimeout(res, 500));
 }
 
 export const usePosts = defineStore("posts", {
@@ -58,6 +58,8 @@ export const usePosts = defineStore("posts", {
     async createPost(newPost: Post) {
       const body = JSON.stringify(newPost);
 
+      await delay();
+
       await window.fetch("/api/posts", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -68,6 +70,7 @@ export const usePosts = defineStore("posts", {
     async updatePost(updatedPost: Post) {
       const body = JSON.stringify(updatedPost);
 
+      await delay();
       await window.fetch("/api/posts", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
