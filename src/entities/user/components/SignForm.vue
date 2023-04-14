@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useField, useForm } from "vee-validate";
+import { useField } from "vee-validate";
 import { computed, ref } from "vue";
 import FormInput from "./FormInput.vue";
 import {
@@ -11,6 +11,7 @@ import { NewUser } from "..";
 
 defineProps<{
   error?: string;
+  isLoading?: boolean;
 }>();
 
 const emit = defineEmits<{
@@ -69,39 +70,43 @@ async function onSubmit() {
 
 <template>
   <form data-testid="sign-form" class="form" @submit.prevent="onSubmit()">
-    <FormInput
-      v-model="username"
-      name="Username"
-      data-testid="user-name"
-      type="text"
-      :error-message="
-        usernameValidation.meta.dirty && usernameValidation.errorMessage.value
-          ? usernameValidation.errorMessage.value
-          : undefined
-      "
-    />
-    <FormInput
-      v-model="password"
-      name="Password"
-      data-testid="user-password"
-      type="password"
-      :error-message="
-        passwordValidation.meta.dirty && passwordValidation.errorMessage.value
-          ? passwordValidation.errorMessage.value
-          : undefined
-      "
-    />
-    <div v-if="error" class="is-danger help">
-      {{ error }}
-    </div>
-    <button
-      type="submit"
-      :disabled="isInvalid"
-      class="button is-primary"
-      :class="{ 'is-warning': isInvalid }"
-    >
-      Submit
-    </button>
+    <progress v-if="isLoading" class="progress is-primary" />
+
+    <template v-else>
+      <FormInput
+        v-model="username"
+        name="Username"
+        data-testid="user-name"
+        type="text"
+        :error-message="
+          usernameValidation.meta.dirty && usernameValidation.errorMessage.value
+            ? usernameValidation.errorMessage.value
+            : undefined
+        "
+      />
+      <FormInput
+        v-model="password"
+        name="Password"
+        data-testid="user-password"
+        type="password"
+        :error-message="
+          passwordValidation.meta.dirty && passwordValidation.errorMessage.value
+            ? passwordValidation.errorMessage.value
+            : undefined
+        "
+      />
+      <div v-if="error" class="is-danger help">
+        {{ error }}
+      </div>
+      <button
+        type="submit"
+        :disabled="isInvalid"
+        class="button is-primary"
+        :class="{ 'is-warning': isInvalid }"
+      >
+        Submit
+      </button>
+    </template>
   </form>
 </template>
 

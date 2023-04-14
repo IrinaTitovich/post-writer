@@ -38,7 +38,7 @@ export const useUsers = defineStore("users", {
         body,
       });
 
-      this.checkAutentification();
+      await this.checkAutentification();
     },
 
     async logout() {
@@ -47,7 +47,7 @@ export const useUsers = defineStore("users", {
         headers: { "Content-Type": "application/json" },
       });
 
-      this.checkAutentification();
+      await this.checkAutentification();
     },
 
     async signIn(user: NewUser) {
