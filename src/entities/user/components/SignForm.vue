@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useField } from "vee-validate";
+import { useField, useForm } from "vee-validate";
 import { computed, ref } from "vue";
 import FormInput from "./FormInput.vue";
 import {
@@ -50,9 +50,7 @@ const { value: password, ...passwordValidation } = useField(
 );
 
 const isInvalid = computed(
-  () =>
-    Boolean(usernameValidation.errors.value.length) ||
-    Boolean(passwordValidation.errors.value.length)
+  () => !usernameValidation.meta.valid || !passwordValidation.meta.valid
 );
 
 async function onSubmit() {

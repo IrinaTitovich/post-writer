@@ -1,7 +1,7 @@
 import { mount } from "@vue/test-utils";
 import { describe, it, expect } from "vitest";
 import { computed, defineComponent, ref } from "vue";
-import FormInput from "../../../components./entities/user/components/FormInput.vue";
+import FormInput from "./FormInput.vue";
 
 describe("FormInput", () => {
   it("test validation", async () => {
@@ -12,28 +12,22 @@ describe("FormInput", () => {
       name="foo"
       type="input"
       v-model="formValue"
-      :status="status"
+      :errorMessage="errorMessage"
       />
       `,
-      setup(props, ctx) {
+      setup() {
         const formValue = ref("foo");
-        const status = computed(() => {
+        const errorMessage = computed(() => {
           if (formValue.value.length > 5) {
-            return {
-              valid: true,
-            };
+            return undefined;
           } else {
-            return {
-              valid: false,
-              message: "Incorrect Length",
-              showError: true,
-            };
+            return "Incorrect Length";
           }
         });
 
         return {
           formValue,
-          status,
+          errorMessage,
         };
       },
     });
@@ -52,11 +46,7 @@ describe("FormInput", () => {
       props: {
         name: "foo",
         modelValue: "bar",
-        status: {
-          valid: false,
-          message: "error",
-          showError: true,
-        },
+        errorMessage: "test",
         type: "input",
       },
     });
@@ -69,9 +59,7 @@ describe("FormInput", () => {
       props: {
         name: "foo",
         modelValue: "bar",
-        status: {
-          valid: true,
-        },
+        status: "",
         type: "input",
       },
     });

@@ -1,6 +1,7 @@
 import { mount } from "@vue/test-utils";
 import { createPinia, Pinia, setActivePinia } from "pinia";
 import { describe, beforeEach, it, expect } from "vitest";
+import { VueQueryPlugin } from "@tanstack/vue-query";
 import { createRouter, createWebHistory, Router } from "vue-router";
 import { routes } from "../../../app/router";
 import { useUsers } from "../../user";
@@ -27,7 +28,7 @@ describe("PostWrite", () => {
   it("renders a post using markdown", async () => {
     const wrapper = mount(PostWrite, {
       global: {
-        plugins: [pinia, router],
+        plugins: [pinia, router, VueQueryPlugin],
       },
       props: {
         post: {
@@ -71,7 +72,7 @@ describe("PostWrite", () => {
       const input = wrapper.find<HTMLDivElement>("#contenteditable");
 
       input.element.innerHTML = "# Title";
-      await input.trigger("input");
+      input.trigger("input");
 
       setTimeout(async () => {
         await wrapper.find("button").trigger("click");

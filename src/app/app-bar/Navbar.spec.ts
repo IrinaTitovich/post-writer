@@ -1,5 +1,8 @@
 import { mount } from "@vue/test-utils";
+import flushPromises from "flush-promises";
+import waitForExpect from "wait-for-expect";
 import { createPinia, Pinia, setActivePinia } from "pinia";
+import { VueQueryPlugin } from "@tanstack/vue-query";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { createRouter, createWebHistory, Router } from "vue-router";
 import { routes } from "../router";
@@ -34,7 +37,7 @@ describe("NavBar", () => {
   it("renders sign-in and sign up buttons when users not authenticated", () => {
     const wrapper = mount(NavBar, {
       global: {
-        plugins: [pinia, router],
+        plugins: [pinia, router, VueQueryPlugin],
       },
     });
 
@@ -48,7 +51,7 @@ describe("NavBar", () => {
 
     const wrapper = mount(NavBar, {
       global: {
-        plugins: [pinia, router],
+        plugins: [pinia, router, VueQueryPlugin],
       },
     });
 
@@ -68,20 +71,24 @@ describe("NavBar", () => {
 
     const wrapper = mount(NavBar, {
       global: {
-        plugins: [pinia, router],
+        plugins: [pinia, router, VueQueryPlugin],
       },
     });
 
     await wrapper.find('[data-testid="log-out"]').trigger("click");
 
-    expect(wrapper.find("#sign-up").exists()).toBe(true);
-    expect(wrapper.find('[data-testid="sign-in"]').exists()).toBe(true);
+    await flushPromises();
+
+    await waitForExpect(() => {
+      expect(wrapper.find("#sign-up").exists()).toBe(true);
+      expect(wrapper.find('[data-testid="sign-in"]').exists()).toBe(true);
+    });
   });
 
   it("sign-in form opens after clicking button sign-in", async () => {
     const wrapper = mount(NavBar, {
       global: {
-        plugins: [pinia, router],
+        plugins: [pinia, router, VueQueryPlugin],
       },
     });
 
@@ -98,7 +105,7 @@ describe("NavBar", () => {
   it("sign-up form opens after clicking button sign-up", async () => {
     const wrapper = mount(NavBar, {
       global: {
-        plugins: [pinia, router],
+        plugins: [pinia, router, VueQueryPlugin],
       },
     });
 

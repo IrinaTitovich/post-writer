@@ -1,4 +1,6 @@
 import { DOMWrapper, mount } from "@vue/test-utils";
+import flushPromises from "flush-promises";
+import waitForExpect from "wait-for-expect";
 import { createPinia, Pinia, setActivePinia } from "pinia";
 import { beforeEach, describe, expect, it } from "vitest";
 import { createRouter, createWebHistory, Router } from "vue-router";
@@ -29,6 +31,8 @@ describe("SignForm", () => {
     expect(wrapper.find('[data-testid="sign-form"]').exists()).toBe(true);
 
     expect(wrapper.find('[data-testid="user-name"]').exists()).toBe(true);
+
+    expect(wrapper.find('[data-testid="user-password"]').exists()).toBe(true);
   });
 
   const setIncorrectValueRequired = async (input: DOMWrapper<Element>) =>
@@ -43,6 +47,14 @@ describe("SignForm", () => {
   const setCorrectValue = async (input: DOMWrapper<Element>) =>
     input.setValue("1234567890");
 
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  async function expectAsync(callback: () => void) {
+    // required by library Veevalidate
+    // https://vee-validate.logaretm.com/v4/guide/testing/
+    await flushPromises();
+    await waitForExpect(callback);
+  }
+
   it("renders username validation message IsRequired", async () => {
     const wrapper = mount(SignForm, {
       global: {
@@ -54,15 +66,19 @@ describe("SignForm", () => {
 
     await setCorrectValue(usernameField.find("#Username"));
 
-    expect(usernameField.find(".is-danger").exists()).toBe(false);
+    await expectAsync(() => {
+      expect(usernameField.find(".is-danger").exists()).toBe(false);
+    });
 
     await setIncorrectValueRequired(usernameField.find("#Username"));
 
-    expect(usernameField.find(".is-danger").exists()).toBe(true);
+    await expectAsync(() => {
+      expect(usernameField.find(".is-danger").exists()).toBe(true);
 
-    expect(usernameField.find(".is-danger").text()).toBe(
-      "This field is required"
-    );
+      expect(usernameField.find(".is-danger").text()).toBe(
+        "This field is required"
+      );
+    });
   });
 
   it("renders username validation message MINMAX", async () => {
@@ -76,19 +92,25 @@ describe("SignForm", () => {
 
     await setCorrectValue(usernameField.find("#Username"));
 
-    expect(usernameField.find(".is-danger").exists()).toBe(false);
+    await expectAsync(() => {
+      expect(usernameField.find(".is-danger").exists()).toBe(false);
+    });
 
     await setIncorrectValueMin(usernameField.find("#Username"));
 
-    expect(usernameField.find(".is-danger").text()).toBe(
-      "This field must be between 3 and 15 characters"
-    );
+    await expectAsync(() => {
+      expect(usernameField.find(".is-danger").text()).toBe(
+        "This field must be between 3 and 15 characters"
+      );
+    });
 
     await setIncorrectValueMax(usernameField.find("#Username"));
 
-    expect(usernameField.find(".is-danger").text()).toBe(
-      "This field must be between 3 and 15 characters"
-    );
+    await expectAsync(() => {
+      expect(usernameField.find(".is-danger").text()).toBe(
+        "This field must be between 3 and 15 characters"
+      );
+    });
   });
 
   it("renders password validation message IsRequired", async () => {
@@ -102,15 +124,19 @@ describe("SignForm", () => {
 
     await setCorrectValue(userpassField.find("#Password"));
 
-    expect(userpassField.find(".is-danger").exists()).toBe(false);
+    await expectAsync(() => {
+      expect(userpassField.find(".is-danger").exists()).toBe(false);
+    });
 
     await setIncorrectValueRequired(userpassField.find("#Password"));
 
-    expect(userpassField.find(".is-danger").exists()).toBe(true);
+    await expectAsync(() => {
+      expect(userpassField.find(".is-danger").exists()).toBe(true);
 
-    expect(userpassField.find(".is-danger").text()).toBe(
-      "This field is required"
-    );
+      expect(userpassField.find(".is-danger").text()).toBe(
+        "This field is required"
+      );
+    });
   });
 
   it("renders userpass validation message MINMAX", async () => {
@@ -124,19 +150,25 @@ describe("SignForm", () => {
 
     await setCorrectValue(userpassField.find("#Password"));
 
-    expect(userpassField.find(".is-danger").exists()).toBe(false);
+    await expectAsync(() => {
+      expect(userpassField.find(".is-danger").exists()).toBe(false);
+    });
 
     await setIncorrectValueMin(userpassField.find("#Password"));
 
-    expect(userpassField.find(".is-danger").text()).toBe(
-      "This field must be between 10 and 20 characters"
-    );
+    await expectAsync(() => {
+      expect(userpassField.find(".is-danger").text()).toBe(
+        "This field must be between 10 and 20 characters"
+      );
+    });
 
     await setIncorrectValueMax(userpassField.find("#Password"));
 
-    expect(userpassField.find(".is-danger").text()).toBe(
-      "This field must be between 10 and 20 characters"
-    );
+    await expectAsync(() => {
+      expect(userpassField.find(".is-danger").text()).toBe(
+        "This field must be between 10 and 20 characters"
+      );
+    });
   });
 
   it("renders submit button state: disabled when validation is incorrect", async () => {
@@ -147,7 +179,9 @@ describe("SignForm", () => {
     });
     const btnElement = wrapper.find("button").element;
 
-    expect(btnElement.disabled).toBe(true);
+    await expectAsync(() => {
+      expect(btnElement.disabled).toBe(true);
+    });
 
     const userpassFieldInput = wrapper
       .find('[data-testid="user-password"]')
@@ -159,18 +193,24 @@ describe("SignForm", () => {
     await setCorrectValue(userpassFieldInput);
     await setCorrectValue(usernameFieldInput);
 
-    expect(btnElement.disabled).toBe(false);
+    await expectAsync(() => {
+      expect(btnElement.disabled).toBe(false);
+    });
 
     await usernameFieldInput.setValue("12");
 
     await setIncorrectValueMin(usernameFieldInput);
 
-    expect(btnElement.disabled).toBe(true);
+    await expectAsync(() => {
+      expect(btnElement.disabled).toBe(true);
+    });
 
     await setCorrectValue(usernameFieldInput);
     await setIncorrectValueMin(userpassFieldInput);
 
-    expect(btnElement.disabled).toBe(true);
+    await expectAsync(() => {
+      expect(btnElement.disabled).toBe(true);
+    });
   });
 
   it("click submit button", async () => {
@@ -190,7 +230,9 @@ describe("SignForm", () => {
     await setCorrectValue(usernameFieldInput);
     await setCorrectValue(userpassFieldInput);
 
-    wrapper.trigger("submit.prevent");
+    await expectAsync(() => {
+      wrapper.trigger("submit.prevent");
+    });
 
     const emittedPayload = wrapper.emitted().submit[0];
 
